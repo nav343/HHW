@@ -194,11 +194,19 @@ def Q15():
 Chapter 2: String Manipulation
 """
 
-#incomplete
 def P1():
     #Q1> Write a program to count the number of times a character occurs in the given string.
-    #string = input("Enter your string: ")
-    pass
+    string = input("Enter your string: ")
+    chars = set(x for x in string if x != ' ')
+    counter = []
+    for i in chars:
+        count = 0
+        for j in string:count += 1 if i == j else 0
+        counter.append(count)
+
+    print("Your string contains: ")
+    for a in range(0, len(chars)): print(f"{list(chars)[a]}: {counter[a]} time(s)...")
+
 
 def P2():
     #Q2> Write a program which replaces all vowels in the string with '*'
@@ -362,5 +370,5 @@ subprocess.run("clear")
 
 print("Chapter 2 starts here..")
 time.sleep(2)
-for j in range(15, 16):
+for j in range(1, 2):
     eval(f"P{j}()")
