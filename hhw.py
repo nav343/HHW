@@ -10,10 +10,64 @@ TYPE C: Programming Practice (Pg 349, 350, 394, 395) -> ANSWERS
 # For styling :)
 import subprocess
 import time
+def Col(string: str, color: str = "LIGHT_WHITE", bold:bool= False) -> str:
+    col = {"BLACK" : "\033[0;30m",
+    "RED" : "\033[0;31m",
+    "GREEN" : "\033[0;32m",
+    "BROWN" : "\033[0;33m",
+    "BLUE" : "\033[0;34m",
+    "PURPLE" : "\033[0;35m",
+    "CYAN" : "\033[0;36m",
+    "LIGHT_GRAY" : "\033[0;37m",
+    "DARK_GRAY" : "\033[1;30m",
+    "LIGHT_RED" : "\033[1;31m",
+    "LIGHT_GREEN" : "\033[1;32m",
+    "YELLOW" : "\033[1;33m",
+    "LIGHT_BLUE" : "\033[1;34m",
+    "LIGHT_PURPLE" : "\033[1;35m",
+    "LIGHT_CYAN" : "\033[1;36m",
+    "LIGHT_WHITE" : "\033[1;37m",
+    "BOLD" : "\033[1m",
+    "FAINT" : "\033[2m",
+    "ITALIC" : "\033[3m",
+    "UNDERLINE" : "\033[4m",
+    "BLINK" : "\033[5m",
+    "NEGATIVE" : "\033[7m",
+    "CROSSED" : "\033[9m",
+    "END" : "\033[0m"}
+    return f"{col.get(color)}{col.get('BOLD') if bold else ''}{string}{col.get('END')}"
 
 """
 Chapter 1: List Manipulation
 """
+
+QL = [ 
+      "Write a program to increment the elements of a list with a number",
+"Write a program that reverses a list of integers (in place)",
+"Write a program that inputs two lists and creates a third, that contains all elements of the first followed by all elements of the second",
+'Ask the user to enter a list containing numbers between 1 and 12. Then replace all of the entries in the list that are greater than 10 with 10',
+"Ask the user to enter a list of strings. Create a new list that consists of those strings with their first characters removed",
+"Write a program to check if a number is present in the list or not. If the number is present, print the position of the number. Print an appropriate message if the number is not present in the list.",
+'Write a program that takes any two lists L and M of the same size and adds their elements together to form a new list N whose elements are sums of the corresponding elements in L and M.',
+"""
+    Q7> Create the following lists using a for loop:
+    (a) A list consisting of the integers 0 through 49
+    (b) A list containing the sqaures of the integers 1 through 50
+""",
+'Write a program which rotates the elments of a list so that the elements at the first index moves to the second index, the elements in the second index moves to the third etc and the elements in the last index moves to the first index',
+"Write a program tha reads the n to display the nth term of Fibonacci series",
+"""
+    Q11> Write programs as per the following specifications
+    (a) Print the length of the longest string in the list of strings str_list.
+    Precondition: the list will contain at least one element.
+
+    (b) L is a list of numbers. Print a new list here each element is the corresponding element of the list L summed with number num.
+""",
+'Write a program to read two lists num and denum which contain the numerators and denominators of same fractions at the respective indexes. Then display the smallest fraction along with its index.',
+'Write a program to display the maximum and minimum values from the specified range of indexes of a list',
+"Write a program to move all duplicate values in a list to the end of the list",
+"Write a program to compare two equal sized lists and print the first index where they differ.",
+      ]
 
 def Q1():
     #Q> Write a program to increment the elements of a list with a number
@@ -41,6 +95,7 @@ def Q3():
     lstRes.extend(lst2)
     print(lstRes)
 
+"""
     # By making custom algorithm
     lst3: list = eval(input("Enter some data (L 1): "))
     lst4: list = eval(input("Enter some data (L 1): "))
@@ -50,6 +105,7 @@ def Q3():
     for j in lst4:
        lstRes2.append(j) 
     print(lstRes2)
+"""
 
 
 def Q4():
@@ -143,6 +199,7 @@ def Q11():
 
 def Q12():
     #Q12> Write a program to read two lists num and denum which contain the numerators and denominators of same fractions at the respective indexes. Then display the smallest fraction along with its index.
+    print()
     num: list[int] = eval(input("Enter the numerator (integer): "))
     denum: list[int] = eval(input("Enter denominator (integer): "))
     resList = []
@@ -175,7 +232,7 @@ def Q14():
         if j in sep: sep.remove(j); dup.append(j)
 
     dup.sort()
-    print(sep + lst)
+    print(sep + dup)
     
 
 def Q15():
@@ -196,6 +253,7 @@ Chapter 2: String Manipulation
 
 def P1():
     #Q1> Write a program to count the number of times a character occurs in the given string.
+    print("Write a program to count the number of times a character occurs in the given string.")
     string = input("Enter your string: ")
     chars = set(x for x in string if x != ' ')
     counter = []
@@ -210,6 +268,7 @@ def P1():
 
 def P2():
     #Q2> Write a program which replaces all vowels in the string with '*'
+    print("Write a program which replaces all vowels in the string with '*'")
     string = input("Enter your string: ")
     for i in string:
         if i.lower() in ['a','e','i','o','u']: string = string.replace(i, '*')
@@ -217,12 +276,14 @@ def P2():
 
 def P3():
     #Q3> Write a program which reverse a string and stores the reversed string in a new string
+    print("Write a program which reverse a string and stores the reversed string in a new string")
     string = input("Enter your string: ")
     revStr = string[::-1]
     print(revStr)
 
 def P4():
     #Q4> Write a program that prompts for a phone number of 10 digits and two dashes, with dashes after the area code and the next three numbers.
+    print("Write a program that prompts for a phone number of 10 digits and two dashes, with dashes after the area code and the next three numbers.")
     phNum = input("Enter your phone number (format: XXX-XXX-XXXX): ")
     if len(phNum.replace("-",'')) != 10 or len(phNum) > 12: print("ERROR: Phone number must contain 10 digits"); exit(1)
     if phNum[3] != '-' or phNum[7] != '-': print("ERROR: Number must be of the form: XXX-XXX-XXXX"); exit(1)
@@ -240,6 +301,17 @@ def P5():
             - the string
             - the sum of the digits
     """
+    print("""
+    Q5> Write a program that should do the following
+    - prompt the user for a string
+    - extract all the digits from the string
+    - If there are digits:
+        - sum the collected digits together
+        - print out:
+            - the original string
+            - the string
+            - the sum of the digits
+    """)
     string = input("Enter a string: ")
     digits = ""
     sum = 0
@@ -256,6 +328,12 @@ def P6():
     - number of characters (including white spaces and punctuations)
     - percentage of characters that are alphanumeric
     """
+    print("""
+    Q6> Write a program that should prompt the user to type some sentences followed by "enter". It should then print the original sentences and the following statics relating to the sentences:
+    - number of words
+    - number of characters (including white spaces and punctuations)
+    - percentage of characters that are alphanumeric
+    """)
     sentence = input("Enter a sentence")
     wordsLength = len(sentence.split(" "))
     charLength = len(sentence)
@@ -272,6 +350,12 @@ def P7():
     - upon input of a sentence s, print the string produced from s by converting each lower case letter to upper case and each upper case letter to lower case
     - all other characters are left unchanged
     """
+    print("""
+    Q7> Write a python program as per specifications given below
+    - repeatedly prompt for a sentence s or for `q` to quit
+    - upon input of a sentence s, print the string produced from s by converting each lower case letter to upper case and each upper case letter to lower case
+    - all other characters are left unchanged
+    """)
 
     while True:
         s = input("Enter a string or 'q' to quit: ")
@@ -293,18 +377,28 @@ def P8():
     - print a string of the form:
       "integer_input + string_digit = sum"
     """
+    print("""
+    Q8> Write a program that does the following:
+    - takes two inputs: the first, an integer and the second, a string
+    - from the input string extact all digits, in the order they occurred, from the string.
+        - if no digits occur, set the extracted digits to 0
+    - add the integer input and the digits extracted from the string together as integers
+    - print a string of the form:
+      "integer_input + string_digit = sum"
+    """)
 
     integer = int(input("Enter an integer: "))
     sentence = input("Enter a sentence: ")
     digits = ""
     for i in sentence:
         if i.isdigit(): digits += i
-    res = integer + int(digits)
-    print(f"{integer} + {int(digits)} = {res}")
+    res = integer + int(digits if len(digits) != 0 else '0')
+    print(f"{integer} + {int(digits if len(digits) != 0 else '0')} = {res}")
 
 #incomplete
 def P9():
     #Q9> Write a program that takes two strings from the user and dsplays the smaller string in single line and the larger string as per the given format (in the book)
+    print("Write a program that takes two strings from the user and dsplays the smaller string in single line and the larger string as per the given format (in the book)")
     """
     str1 = input("Enter string 1: ")
     str2 = input("Enter string 2: ")
@@ -315,19 +409,23 @@ def P9():
         pattern += larger[i] + (len(larger) -2)*" " + larger[-i] + '\n'
     print(pattern)
     """
+    print("incomplete")
     pass
 
 #incomplete
 def P10():
+    print("incomplete")
     pass
 
 def P11():
     #Q11> Write a program that asks the user for a string (only single space b/w words) and returns an estimate of how many words are in the string
+    print("Write a program that asks the user for a string (only single space b/w words) and returns an estimate of how many words are in the string")
     string = input("Enter a string: ")
     print(f"Your string contains {len(string.split())} words")
 
 def P12():
     #Q12> Write a program to input a formula with some brackets and checks, and prints out if the formula has the same number of opening and closing parenthesis
+    print("Write a program to input a formula with some brackets and checks, and prints out if the formula has the same number of opening and closing parenthesis")
     formula = input("Enter some formula: ")
     noOpen, noClose = 0,0
     for i in formula:
@@ -337,6 +435,7 @@ def P12():
 
 def P13():
     #Q13> Write a program that inputs a line of text and prints out the count of vowels in it
+    print("Write a program that inputs a line of text and prints out the count of vowels in it")
     string = input("Enter a string: ")
     noVowels = 0
     for i in string: noVowels += 1 if i in 'aeiou' else 0
@@ -344,31 +443,38 @@ def P13():
 
 def P14():
     #Q14> Write a program to input a line of text and print the biggest word (length wise) from it
+    print("Write a program to input a line of text and print the biggest word (length wise) from it")
     string = input("Enter a string: ")
     words = string.split()
     noWords = [len(i) for i in words]
     print(f"The longest word in your string contains {max(noWords)} letters")
-    print(f"The first occurrence of longest word in your string {words[max(noWords)]} letters")
+    print(f"The first occurrence of longest word in your string is -> {words[noWords.index(max(noWords))]}")
 
 def P15():
     #Q15> Write a program to input a line of text and create a new line of text where each word of input line in reversed
+    print("Write a program to input a line of text and create a new line of text where each word of input line in reversed")
     string = input("Enter a string: ")
     words = string.split()
     [print(x, end=' ') for x in [i[::-1] for i in words]]
 
 # For running all programs in one go
-print("Chapter 1 starts here...")
+print(Col("Chapter 1 starts here...", 'GREEN', bold=True))
 time.sleep(1)
 subprocess.run("clear")
 
-for i in range(15, 16):
+for i in range(1, 16):
+    print(Col(QL[i-1], "PURPLE"))
     eval(f"Q{i}()")
+    print('\n\n')
 
-print("Chapter 1 ends here..")
-time.sleep(2)
+print(Col("Chapter 1 ends here..", 'RED', bold=True))
+for x in range(5, 0, -1):
+    print(Col(f"Clearing in {x} second{'s' if x != 1 else ''}...", "NEGATIVE", bold=True), end='\r');time.sleep(1)
 subprocess.run("clear")
 
-print("Chapter 2 starts here..")
+print(Col("Chapter 2 starts here..", "GREEN", bold=True))
 time.sleep(2)
-for j in range(1, 2):
+for j in range(1, 16):
     eval(f"P{j}()")
+    print('\n\n')
+print(Col("DONE!!!", "BOLD"))
