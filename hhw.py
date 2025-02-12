@@ -3,11 +3,16 @@ Autumn Holiday Homework
 CLASS: 11th B
 CHAPTERS: List Manipulation
         : String Manipulation
+        : Dictionaries
 
-TYPE C: Programming Practice (Pg 349, 350, 394, 395) -> ANSWERS
+TYPE C: Programming Practice (Pg 349, 350, 394, 395, 472) -> ANSWERS
 """
 
 # For styling :)
+import calendar
+import json
+import random
+import os
 import subprocess
 import time
 def Col(string: str, color: str = "LIGHT_WHITE", bold:bool= False) -> str:
@@ -457,10 +462,141 @@ def P15():
     words = string.split()
     [print(x, end=' ') for x in [i[::-1] for i in words]]
 
+
+"""
+Chapter 3: Dictionaries
+"""
+def X1():
+    data = {}
+    while True:
+        n = input("ENTER A NAME (or 'q' to exit): ")
+        if n.lower() == 'q': break
+        s = int(input(f"ENTER {n}'s salary"))
+        data[n] = s
+    print(json.dumps(data, indent=2))
+
+def X2():
+    string = input("Enter a string>> ")
+    data = {}
+    for i in string:
+        data.setdefault(i, string.count(i))
+    print(json.dumps(data, indent=2))
+
+def X3():
+    data = {
+            0: "Zero",
+            1: "One",
+            2: "Two",
+            3: "Three",
+            4: "Four",
+            5: "Five",
+            6: "Six",
+            7: "Seven",
+            8: "Eight",
+            9: "Nine",
+            }
+    num = input("Enter a number: ")
+    [print(data[int(i)], end=' ') for i in num]
+
+def X4():
+    data = {}
+    while True:
+        team = input("Enter a team name (or s to stop entering): ")
+        if team.lower() == 's': break
+        w = int(input(f"Number of times team {team} has won: "))
+        l = int(input(f"Number of times team {team} has lost: "))
+        data[team] = [w, l]
+    print("Data stored!")
+    name = input("Enter any team's name: ")
+    print(f">>> {name} has a winning percentage of {(data[name][0]/(data[name][0] + data[name][1]))*100}%")
+    wins = []
+    [wins.append(x[0]) for x in list(data.values())]
+    print(wins, end=' ')
+
+def X5():
+    data = {}
+    while True:
+        prod = input("Enter a product name (or s to stop entering): ")
+        if prod.lower() == 's': break
+        price = int(input(f"Enter {prod}'s price: "))
+        data.setdefault(prod, price)
+    print("Data Stored!!")
+    while True:
+        n = input("Enter a product's name (or q to quit): ")
+        if n.lower() == 'q': break
+        print(f"Price of {n} is -> {data[n]}") if n in data else print(f"{n} is out of stock!!")
+
+def X6():
+    cal = {}
+    for i in range(1, 13): cal[calendar.month_name[i]] = calendar.monthrange(2025, i)[1]
+    n = input("Enter a month's name: ")
+    print(f"{n.title()} has {cal[n.title()]} days.")
+    months = list(cal.keys())
+    print(sorted(months))
+    print("Months having 31 days >>> ", end=' ')
+    [print(x if cal[x] == 31 else '', end=' ') for x in months]
+
+def X7():
+    pass
+
+def X8():
+    x = {'k1': 'v1', 'k2':'v2', 'k3': 'v3'}
+    inv = {}
+    keys, values = list(x.keys()), list(x.values())
+    for i in range(0, len(keys)): inv[values[i]] = keys[i]
+    print(inv)
+
+def X9():
+    d1 = eval(input("Enter key-value pair of dictionary 1: "))
+    d2 = eval(input("Enter key-value pair of dictionary 2: "))
+    [print(x if x in d2 else '', end=' ') for x in d1]
+
+def X10():
+    d = eval(input("Enter key-value pair of a dictionary: "))
+    values = list(d.values())
+    for i in values:
+        if values.count(i) > 1:
+            print("2 keys have the same value")
+            break
+    else:
+        print("No keys have same values")
+
+def X11():
+    pass
+
+def X12():
+    d = eval(input("Enter key-value pair of dictionary 1: "))
+    dres = {}
+    for i in d: dres[i] = sum(d[i])
+    print(dres)
+
+
+def X13():
+    d = eval(input("Enter key-value (integer value) pair of a dictionary: "))
+    values = sorted(list(d.values()), reverse=True)
+    print(f"Largest 2 values is {values[0]} and {values[1]}")
+
+def X14():
+    dct = eval(input("Enter a dictionary: "))
+    print("Empty" if len(dct) == 0 else 'Not Empty')
+
+def X15():
+    cand = ['a', 'b', 'c']
+    evm_data = {}
+    for i in range(1, 11): evm_data[i] = random.choice(cand)
+    votes = {}
+    for i in cand: votes[i] = list(evm_data.values()).count(i)
+    res_values = list(votes.values())
+    res_cand = list(votes.keys())
+    w = res_cand[res_values.index(max(res_values))]
+    print(json.dumps(votes, indent=2))
+    print(f"The winner is {w}")
+
+
 # For running all programs in one go
 print(Col("Chapter 1 starts here...", 'GREEN', bold=True))
 time.sleep(1)
-subprocess.run("clear")
+subprocess.run("cls" if os.name == 'nt' else 'clear')
 
 for i in range(1, 16):
     print(Col(QL[i-1], "PURPLE"))
@@ -470,11 +606,22 @@ for i in range(1, 16):
 print(Col("Chapter 1 ends here..", 'RED', bold=True))
 for x in range(5, 0, -1):
     print(Col(f"Clearing in {x} second{'s' if x != 1 else ''}...", "NEGATIVE", bold=True), end='\r');time.sleep(1)
-subprocess.run("clear")
+subprocess.run("cls" if os.name == 'nt' else 'clear')
 
 print(Col("Chapter 2 starts here..", "GREEN", bold=True))
 time.sleep(2)
 for j in range(1, 16):
     eval(f"P{j}()")
+    print('\n\n')
+
+print(Col("Chapter 2 ends here..", 'RED', bold=True))
+for x in range(5, 0, -1):
+    print(Col(f"Clearing in {x} second{'s' if x != 1 else ''}...", "NEGATIVE", bold=True), end='\r');time.sleep(1)
+subprocess.run("cls" if os.name == 'nt' else 'clear')
+
+print(Col("Chapter 3 starts here..", "GREEN", bold=True))
+time.sleep(2)
+for j in range(1, 16):
+    eval(f"X{j}()")
     print('\n\n')
 print(Col("DONE!!!", "BOLD"))
